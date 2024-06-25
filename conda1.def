@@ -1,0 +1,22 @@
+Bootstrap: docker
+From: jupyter/scipy-notebook
+
+%labels
+	Author Francesco Lovergine
+	ContactEmail frankie@debian.org
+	Name Scipy container with Conda
+
+%post
+	apt update -y
+	apt install -y \
+	build-essential \
+        apt-utils \
+        curl \
+        git \
+        gzip \
+        tar \
+        unzip \
+        cmake \
+        libtool
+	conda install cuda112py39ha0cca9b_202
+

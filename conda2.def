@@ -1,0 +1,29 @@
+Bootstrap: localimage
+From: conda1.sif
+
+%files
+	conda_env.yml
+
+%post
+    	/opt/conda/bin/conda env create -f conda_env.yml
+    	echo ". /opt/conda/etc/profile.d/conda.sh" >> /etc/bash.bashrc
+    	echo "conda activate $(head -n 1 conda_env.yml | cut -f 2 -d ' ')" >> /etc/bash.bashrc
+
+%environment
+    	export SINGULARITY_SHELL=/bin/bash
+ 
+%runscript
+	cd $HOME
+	export PATH=$PATH:$HOME/.local/bin
+
+	if [ ! -d hls-foundation-os ]
+	then
+		git clone https://github.com/NASA-IMPACT/hls-foundation-os.git
+	fi
+
+#	What follows can be used to run python3 with the right environment:
+#	apptainer shell --bind $HOME/.cache:/home/jovyan/.cache,/project/geocourse conda2.sif
+#		cd hls-foundation-os && pip3 install -e . --no-cache-dir
+#	For using a GPU:
+#	srun -p gpu_a100_22c --gpus a100:1 --pty /bin/bash
+#	then should work nvidia-smi and the same for apptainer ...
