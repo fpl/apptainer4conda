@@ -18,5 +18,3 @@ From: jupyter/scipy-notebook
         unzip \
         cmake \
         libtool
-	conda install cuda112py39ha0cca9b_202
-
