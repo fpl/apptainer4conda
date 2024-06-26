@@ -1,4 +1,4 @@
-# Apptainer4Pconda
+# Apptainer4Conda
 
 This is an example of multi-stage build of an apptainer container for a Conda environment 
 based on stuff provided by Jupyter team (originally Docker stuff).
